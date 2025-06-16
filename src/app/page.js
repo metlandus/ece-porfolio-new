@@ -3,17 +3,16 @@ import Image from "next/image";
 export default function Home() {
 	return (
 		<div>
-			<div className="container mx-auto flex justify-between items-center py-4">
-				<div className="logo">
-					<h2 className="text-2xl font-bold">Ece</h2>
-				</div>
-
-				<button className="hidden lg:block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-					Let&apos;s Talk
-				</button>
-			</div>
-
 			<main>
+				<section id="hero" className="bg-main-yellow flex justify-center">
+					<div className="">
+						<p className="text-[280px] font-light leading-none text-right text-main-text">
+							ECE <br />
+							SAYDUT.
+						</p>
+					</div>
+				</section>
+
 				<section className="slider-area h-screen flex items-center justify-center">
 					<div className="text-center">
 						<h1 className="text-5xl font-bold">Ece Saydut.</h1>
