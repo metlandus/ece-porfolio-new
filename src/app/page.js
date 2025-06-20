@@ -1,83 +1,57 @@
+"use client";
 import Image from "next/image";
+import Typewriter from "@/components/Typewriter";
 
 export default function Home() {
 	return (
 		<div>
 			<main>
-				<section id="hero" className="bg-main-yellow flex justify-center">
-					<div className="">
+				<section
+					id="hero"
+					className="bg-main-yellow flex justify-center "
+				>
+					<div className="container mx-100 my-10 flex flex-col gap-10">
 						<p className="text-[280px] font-light leading-none text-right text-main-text">
-							ECE <br />
-							SAYDUT.
+							ECE <br /> SAYDUT.
 						</p>
-					</div>
-				</section>
 
-				<section className="slider-area h-screen flex items-center justify-center">
-					<div className="text-center">
-						<h1 className="text-5xl font-bold">Ece Saydut.</h1>
-						<p className="mt-4 text-lg">
-							Graphic designer at
+						<div className="text-main-text text-right text-6xl">
+							<Typewriter
+								strings={[
+									"Graphic Designer",
+									"Motion Designer",
+								]}
+								delay={200}
+								pauseAfterTyping={1500}
+							/>
+						</div>
+						<div className="flex gap-2  text-main-text text-right justify-end text-3xl">
+							<p className="font-extralight">
+								Graphic Designer at{" "}
+							</p>
 							<a
 								href="https://www.linkedin.com/company/medicana-health-group/"
 								target="_blank"
-								className="text-blue-500 hover:underline"
+								className="underline hover:text-main-text/80"
 							>
-								Medicana Health Group
+								Medicana International
 							</a>
-						</p>
-					</div>
-				</section>
-
-				<section id="about" className="about-area py-20">
-					<div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-						<div>
-							<h2 className="text-3xl font-bold mb-4">
-								About Me
-							</h2>
-							<p className="mb-4">
-								I’m an Istanbul-based Art Director specializing
-								in motion design and creative storytelling. I’ve
-								worked on 360° campaigns and international
-								broadcasting projects for global brands.
-							</p>
-							<p>
-								My focus is on crafting impactful visuals for
-								social media, branding, and motion graphics.
-								With a strong command of Adobe After Effects,
-								Photoshop, Illustrator, and other tools, I bring
-								ideas to life through dynamic design. I’m
-								passionate about blending creativity with
-								strategy to deliver compelling visual
-								experiences.
-							</p>
-						</div>
-						<div>
-							<Image
-								src="/assets/img/gallery/Ece About Me (2).jpg"
-								alt="Ece Saydut"
-								width={500}
-								height={500}
-								className="rounded-lg"
-							/>
 						</div>
 					</div>
 				</section>
-
-				<section id="experience" className="py-20 bg-gray-100">
-					<div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-						<div className="text-center">
-							<span className="text-4xl font-bold">5 years</span>
-							<p>of experience</p>
-						</div>
-						<div className="text-center">
-							<span className="text-4xl font-bold">$40M+</span>
-							<p>invested in projects I was involved in</p>
-						</div>
-						<div className="text-center">
-							<span className="text-4xl font-bold">Multiple</span>
-							<p>industry awards</p>
-						</div>
+				<section id="aboutme" className="bg-gray-100">
+					<div className="container mx-auto px-4">
+						<p>MEtemetmemetEcCECECE</p>
+					</div>
+				</section>
+				<section id="aboutme" className="bg-gray-200">
+					<div className="container mx-auto px-4">
+						<p>MEtemetmemetEcCECECE</p>
+					</div>
+				</section>
+				<section id="aboutme" className="bg-gray-300">
+					<div className="container mx-auto px-4">
+						<p>MEtemetmemetEcCECECE</p>
 					</div>
 				</section>
 			</main>
