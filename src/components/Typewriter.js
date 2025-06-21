@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const TypewriterComponent = ({
+const Typewriter = ({
 	strings = [],
 	loop = false,
 	cursor = "|",
@@ -55,10 +55,10 @@ const TypewriterComponent = ({
 				return;
 			}
 
-			timeoutRef.current = setTimeout(handleTyping, nextDelay);
+			timeoutRef.current = setTimeout(handleTyping, nextDelay); // Ensure nextDelay is used consistently
 		};
 
-		timeoutRef.current = setTimeout(handleTyping, delay);
+		timeoutRef.current = setTimeout(handleTyping, delay); // Ensure nextDelay is used consistently
 
 		return () => clearTimeout(timeoutRef.current);
 	}, [
@@ -82,4 +82,4 @@ const TypewriterComponent = ({
 	);
 };
 
-export default TypewriterComponent;
+export default Typewriter;

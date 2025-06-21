@@ -8,8 +8,9 @@ export const metadata = {
 };
 
 const poppins = Poppins({
-	subsets: ["latin-ext"],
-	weight: ["300", "400", "500", "600", "700", "800"],
+	subsets: ["latin"],
+	weight: ["200", "300", "400", "500", "600", "700", "800"],
+	display: "swap",
 });
 
 export default function RootLayout({ children }) {
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
 						</Link>
 						<nav className="flex gap-6">
 							<Link
-								href="/#about"
+								href="/#aboutme"
 								className="text-main-text py-3 px-1 hover:text-main-yellow focus:border-b-2 focus:border-main-text"
 							>
 								About
