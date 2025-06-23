@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Typewriter from "@/components/Typewriter";
+import Experience from "@/components/Experience";
 
 export default function Home() {
 	return (
@@ -10,7 +11,7 @@ export default function Home() {
 					id="hero"
 					className="bg-main-yellow flex justify-center "
 				>
-					<div className="container mx-100 my-5 flex flex-col gap-10">
+					<div className="container mx-100 my-10 flex flex-col gap-10">
 						<p className="text-[280px] font-light leading-none text-right text-main-text">
 							ECE <br /> SAYDUT.
 						</p>
@@ -38,7 +39,7 @@ export default function Home() {
 						</div>
 					</div>
 				</section>
-				<section id="aboutme" className="">
+				<section id="aboutme">
 					<div className="container mx-auto flex px-4 gap-10 justify-center items-center">
 						<div className="flex flex-col w-1/2 justify-center gap-10 px-20">
 							<h2 className="text-8xl text-main-text font-light">
@@ -65,21 +66,71 @@ export default function Home() {
 						</div>
 						<Image
 							alt="ece-saydut"
-							// href="/public/images/Ece About Me (2).jpg"
-							src={"/images/Ece-About-Me.jpg"}
-							width={600}
-							height={600}
+							src="/images/Ece-About-Me.jpg"
+							quality={100}
+							width={700}
+							height={700}
 						/>
 					</div>
 				</section>
-				<section id="aboudawdtme" className="bg-gray-200">
-					<div className="container mx-auto px-4">
-						<p>MEtemetmemetEcCECECE</p>
+				<section id="experience" className="bg-main-text">
+					<div className="container mx-auto">
+						<h2 className="text-white text-7xl font-light">
+							Experience
+						</h2>
+						<div className="flex flex-col gap-10">
+							<Experience
+								title={"Graphic Designer"}
+								workDate={"Jun 24 - Current "}
+								link={
+									"https://www.linkedin.com/company/medicana-health-group/"
+								}
+								company={"Medicana Health Group, Ist"}
+							/>
+							<Experience
+								title={"Designer"}
+								workDate={"Sep 22 - Sep 23 "}
+								link={"https://www.linkedin.com/company/yuddy/"}
+								company={"Jaliri, Ist"}
+							/>
+							<Experience
+								title={"Graphic Designer"}
+								workDate={"Dec 21 - Aug 22 "}
+								link={
+									"https://www.linkedin.com/company/acunmedya/"
+								}
+								company={
+									"Acun Medya Global, Dominican Republic"
+								}
+							/>
+							<Experience
+								title={"Art Director Intern"}
+								workDate={"Oct 19 - May 20"}
+								link={
+									"https://www.linkedin.com/company/4129grey/"
+								}
+								company={"4129Grey, Ist"}
+							/>
+							<Experience
+								title={"Graphic Design Intern"}
+								workDate={"Aug 15 - Jun 16 "}
+								company={"Gelişim Reklam, Ist"}
+							/>
+						</div>
+						<h2 className="text-white text-7xl font-light">
+							Education
+						</h2>
+						<Experience
+							title={"Visual Communication Design"}
+							workDate={"Sep 16 - Jun 12 "}
+							link={"https://bau.edu.tr/"}
+							company={"Bahçeşehir University, Ist"}
+						/>
 					</div>
 				</section>
-				<section id="aboudawdtme" className="bg-gray-300">
-					<div className="container mx-auto px-4">
-						<p>MEtemetmemetEcCECECE</p>
+				<section id="selectedportfolios" className="bg-main-yellow">
+					<div className="container mx-auto">
+						<h2 className="font-light text-7xl text-main-text">Selected Portfolios</h2>
 					</div>
 				</section>
 			</main>
