@@ -1,11 +1,12 @@
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
+import { Image } from "primereact/image";
 import Typewriter from "@/components/Typewriter";
 import Experience from "@/components/Experience";
 
 export default function Home() {
 	return (
-		<div>
+		
 			<main>
 				<section
 					id="hero"
@@ -129,11 +130,52 @@ export default function Home() {
 					</div>
 				</section>
 				<section id="selectedportfolios" className="bg-main-yellow">
-					<div className="container mx-auto">
-						<h2 className="font-light text-7xl text-main-text">Selected Portfolios</h2>
+					<div className="container mx-auto py-10 flex flex-col gap-10">
+						<h2 className="font-light text-7xl text-main-text self-start">
+							Selected Portfolios
+						</h2>
+						<div className="grid grid-cols-2 gap-x-40 gap-y-10 w-2/3 self-center">
+							<div className="w-full h-100 overflow-hidden ">
+								<Image
+									src="/portfolio-images/DaVinci.png"
+									alt="ece-port-img"
+									quality={100}
+									width={500}
+									height={500}
+									preview
+									className="h-full hover:text-9xl object-cover"
+								/>
+							</div>
+							<div className="w-full h-100 overflow-hidden ">
+								<Image
+									src="/portfolio-images/kidney-transplant.png"
+									alt="ece-port-img"
+									quality={100}
+									width={500}
+									height={500}
+									preview
+									className="h-full object-cover"
+								/>
+							</div>
+							<div className="w-full h-100 overflow-hidden ">
+								<Image
+									src="/portfolio-images/jaliri-red.png"
+									alt="ece-port-img"
+									quality={100}
+									preview
+									className="object-cover"
+								/>
+							</div>
+							<div className="w-full h-100 overflow-hidden ">
+								<Image
+									src="/portfolio-images/Exathlon.jpg"
+									alt="ece-port-img"
+									preview
+								/>
+							</div>
+						</div>
 					</div>
 				</section>
 			</main>
-		</div>
 	);
 }
