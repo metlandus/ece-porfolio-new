@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
 									Portfolio
 								</Link>
 								<Link
-									href="/#contact"
+									href="/#contactme"
 									className="text-main-text py-3 px-1 hover:text-blue-500 focus:border-b-2 focus:border-main-text"
 								>
 									Contact
@@ -57,6 +57,7 @@ export default function RootLayout({ children }) {
 						</header>
 					</section>
 					{children}
+					<footer>METETEETETARŞAWERJLAKŞ</footer>
 				</body>
 			</PrimeReactProvider>
 		</html>
