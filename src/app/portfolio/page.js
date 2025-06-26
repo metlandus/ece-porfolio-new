@@ -1,70 +1,68 @@
 "use client";
+
 import { Galleria } from "primereact/galleria";
-import { Image } from "primereact/image";
+import "primereact/resources/themes/lara-light-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import Image from "next/image";
 
-const images = [
-	{
-		itemImageSrc: "/portfolio-images/DaVinci.png",
-		thumbnailImageSrc: "/portfolio-images/DaVinci.png",
-		alt: "DaVinci",
-		title: "DaVinci",
-	},
-	{
-		itemImageSrc: "/portfolio-images/kidney-transplant.png",
-		thumbnailImageSrc: "/portfolio-images/kidney-transplant.png",
-		alt: "Kidney Transplant",
-		title: "Kidney Transplant",
-	},
-	// ...add all your images here
-];
+const images = Array.from({ length: 30 }, (_, i) => ({
+	itemImageSrc: `/portfolio/medicana/Medicana-${i + 1}.png`,
+	thumbnailImageSrc: `/portfolio/medicana/Medicana-${i + 1}.png`,
+	alt: `Medicana ${i + 1}`,
+	title: `Medicana ${i + 1}`,
+}));
 
+const itemTemplate = (item) => (
+	<Image
+		src={item.itemImageSrc}
+		alt={item.alt}
+		quality={100}
+		width={15000}
+		height={15000}
+		style={{
+			width: "100%",
+			height: "60vh",
+			objectFit: "contain",
+			background: "#3a491c",
+		}}
+	/>
+);
+const thumbnailTemplate = (item) => (
+	<Image
+		src={item.thumbnailImageSrc}
+		alt={item.alt}
+		quality={80}
+		width={100}
+		height={100}
+		style={{
+			width: "100%",
+			aspectRatio: "1/1",
+			objectFit: "cover",
+			borderRadius: "0.5rem",
+		}}
+	/>
+);
 export default function Portfolio() {
-	const itemTemplate = (item) => (
-		<Image
-			src={item.itemImageSrc}
-			alt={item.alt}
-			style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
-		/>
-	);
-
-	const thumbnailTemplate = (item) => (
-		<Image
-			src={item.thumbnailImageSrc}
-			alt={item.alt}
-			style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
-		/>
-	);
-
 	return (
 		<main className="bg-main-yellow min-h-screen">
 			<section className="container mx-auto py-10">
 				<h1 className="text-4xl mb-8">My Portfolio</h1>
-				<Galleria
-					value={images}
-					numVisible={8}
-					circular
-					showThumbnails={false}
-					showItemNavigators
-					showIndicators
-					item={itemTemplate}
-					thumbnail={thumbnailTemplate}
-					style={{ maxWidth: 900 }}
-					responsiveOptions={[
-						{
-							breakpoint: "991px",
-							numVisible: 6,
-						},
-						{
-							breakpoint: "767px",
-							numVisible: 4,
-						},
-						{
-							breakpoint: "575px",
-							numVisible: 2,
-						},
-					]}
-					showItemNavigatorsOnHover
-				/>
+				<div className="card">
+					<Galleria
+						value={images}
+						numVisible={8}
+						showThumbnails
+						showItemNavigators
+						showItemNavigatorsOnHover
+						circular
+						item={itemTemplate}
+						thumbnail={thumbnailTemplate}
+						style={{ maxWidth: 900 }}
+						thumbnailsPosition="bottom"
+						showIndicators={false}
+						showIndicatorsOnItem={false}
+					/>
+				</div>
 			</section>
 		</main>
 	);
