@@ -7,68 +7,46 @@ import "primereact/resources/primereact.min.css";
 import { Image } from "primereact/image";
 import NextImage from "next/image";
 
-const GROUP_SIZE = 6;
-const GROUP_COUNT = 5;
-
-// Images
-const imageGroups = Array.from({ length: GROUP_COUNT }, (_, groupIdx) => {
-	const start = groupIdx * GROUP_SIZE + 1;
-	return Array.from({ length: GROUP_SIZE }, (_, i) => ({
-		itemImageSrc: `/portfolio/medicana/Medicana-${start + i}.png`,
-		thumbnailImageSrc: `/portfolio/medicana/Medicana-${start + i}.png`,
-		alt: `Medicana ${start + i}`,
-		title: `Medicana ${start + i}`,
-	}));
-});
-const jaliriImageGroups = Array.from({ length: 1 }, (_, groupIdx) => {
-	const start = groupIdx * 2 + 1;
-	return Array.from({ length: 2 }, (_, i) => ({
-		itemImageSrc: `/portfolio/jaliri/Jaliri-${start + i}.png`,
-		thumbnailImageSrc: `/portfolio/jaliri/Jaliri-${start + i}.png`,
-		alt: `Medicana ${start + i}`,
-		title: `Medicana ${start + i}`,
-	}));
-});
-
-// Koc
-const kocImageGroups = [
-	Array.from({ length: 4 }, (_, i) => ({
-		itemImageSrc: `/portfolio/koc/Koc-${i + 1}.png`,
-		thumbnailImageSrc: `/portfolio/koc/Koc-${i + 1}.png`,
-		alt: `Koc ${i + 1}`,
-		title: `Koc ${i + 1}`,
-	})),
+// Group definitions
+const groupDefs = [
+	{ key: "medicana", prefix: "medicana", groupCount: 5, groupSize: 6 },
+	{ key: "jaliri", prefix: "jaliri", groupCount: 1, groupSize: 2 },
+	{ key: "koc", prefix: "koc", groupCount: 1, groupSize: 4 },
+	{ key: "mastercard", prefix: "mastercard", groupCount: 1, groupSize: 2 },
+	{ key: "divan", prefix: "divan", groupCount: 1, groupSize: 3 },
+	{ key: "grid", prefix: "grid", groupCount: 1, groupSize: 2 },
+	{
+		key: "hershey-sub",
+		prefix: "hershey-sub",
+		ext: "jpg",
+		groupCount: 1,
+		groupSize: 6,
+	},
 ];
 
-// Mastercard
-const mastercardImageGroups = [
-	Array.from({ length: 2 }, (_, i) => ({
-		itemImageSrc: `/portfolio/mastercard/Mastercard-${i + 1}.png`,
-		thumbnailImageSrc: `/portfolio/mastercard/Mastercard-${i + 1}.png`,
-		alt: `Mastercard ${i + 1}`,
-		title: `Mastercard ${i + 1}`,
-	})),
-];
+// Create image groups based on definitions
+const createImageGroups = ({ prefix, ext = "png", groupCount, groupSize }) => {
+	return Array.from({ length: groupCount }, (_, groupIdx) => {
+		const start = groupIdx * groupSize + 1;
+		return Array.from({ length: groupSize }, (_, i) => ({
+			itemImageSrc: `/portfolio/${prefix}/${prefix}-${start + i}.${ext}`,
+			thumbnailImageSrc: `/portfolio/${prefix}/${prefix}-${
+				start + i
+			}.${ext}`,
+			alt: `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} ${
+				start + i
+			}`,
+			title: `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} ${
+				start + i
+			}`,
+		}));
+	});
+};
 
-// Divan
-const divanImageGroups = [
-	Array.from({ length: 3 }, (_, i) => ({
-		itemImageSrc: `/portfolio/divan/Divan-${i + 1}.png`,
-		thumbnailImageSrc: `/portfolio/divan/Divan-${i + 1}.png`,
-		alt: `Divan ${i + 1}`,
-		title: `Divan ${i + 1}`,
-	})),
-];
-
-// Hershey-Sub (2 groups, 3 images each)
-const hersheySubImageGroups = [
-	Array.from({ length: 6 }, (_, i) => ({
-		itemImageSrc: `/portfolio/hershey-sub/Hershey-Sub-${i + 1}.jpg`,
-		thumbnailImageSrc: `/portfolio/hershey-sub/Hershey-Sub-${i + 1}.jpg`,
-		alt: `Hershey-Sub ${i + 1}`,
-		title: `Hershey-Sub ${i + 1}`,
-	})),
-];
+// All image groups
+const allImageGroups = Object.fromEntries(
+	groupDefs.map((def) => [def.key, createImageGroups(def)])
+);
 
 // Videos
 const videoGroups = Array.from({ length: 4 }, (_, groupIdx) => {
@@ -93,17 +71,19 @@ export default function Portfolio() {
 	// Helper to get the correct group array
 	const getActiveImageGroup = () => {
 		if (activeCompany === "medicana") {
-			return imageGroups[activeImageGroup];
+			return allImageGroups["medicana"][activeImageGroup];
 		} else if (activeCompany === "jaliri") {
-			return jaliriImageGroups[activeImageGroup];
+			return allImageGroups["jaliri"][activeImageGroup];
 		} else if (activeCompany === "koc") {
-			return kocImageGroups[activeImageGroup];
+			return allImageGroups["koc"][activeImageGroup];
 		} else if (activeCompany === "mastercard") {
-			return mastercardImageGroups[activeImageGroup];
+			return allImageGroups["mastercard"][activeImageGroup];
 		} else if (activeCompany === "divan") {
-			return divanImageGroups[activeImageGroup];
+			return allImageGroups["divan"][activeImageGroup];
 		} else if (activeCompany === "hershey-sub") {
-			return hersheySubImageGroups[activeImageGroup];
+			return allImageGroups["hershey-sub"][activeImageGroup];
+		} else if (activeCompany === "grid") {
+			return allImageGroups["grid"][activeImageGroup];
 		}
 		return [];
 	};
@@ -114,7 +94,7 @@ export default function Portfolio() {
 				<h1 className="text-4xl mb-8">My Portfolio</h1>
 				{/* Images Grid */}
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-					{imageGroups.map((group, idx) => (
+					{allImageGroups["medicana"].map((group, idx) => (
 						<button
 							key={`medicana-${idx}`}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
@@ -137,7 +117,7 @@ export default function Portfolio() {
 							/>
 						</button>
 					))}
-					{jaliriImageGroups.map((group, idx) => (
+					{allImageGroups["jaliri"].map((group, idx) => (
 						<button
 							key={`jaliri-${idx}`}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
@@ -160,7 +140,7 @@ export default function Portfolio() {
 							/>
 						</button>
 					))}
-					{kocImageGroups.map((group, idx) => (
+					{allImageGroups["koc"].map((group, idx) => (
 						<button
 							key={`koc-${idx}`}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
@@ -183,7 +163,7 @@ export default function Portfolio() {
 							/>
 						</button>
 					))}
-					{mastercardImageGroups.map((group, idx) => (
+					{allImageGroups["mastercard"].map((group, idx) => (
 						<button
 							key={`mastercard-${idx}`}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
@@ -207,7 +187,7 @@ export default function Portfolio() {
 						</button>
 					))}
 
-					{divanImageGroups.map((group, idx) => (
+					{allImageGroups["divan"].map((group, idx) => (
 						<button
 							key={`divan-${idx}`}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
@@ -230,12 +210,35 @@ export default function Portfolio() {
 							/>
 						</button>
 					))}
-					{hersheySubImageGroups.map((group, idx) => (
+					{allImageGroups["hershey-sub"].map((group, idx) => (
 						<button
 							key={`hershey-sub-${idx}`}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
 							onClick={() => {
 								setActiveCompany("hershey-sub");
+								setActiveImageGroup(idx);
+								setTimeout(() => {
+									imageGalleriaRef.current?.show();
+								}, 0);
+							}}
+						>
+							<Image
+								src={group[0].thumbnailImageSrc}
+								alt={group[0].alt}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "cover",
+								}}
+							/>
+						</button>
+					))}
+					{allImageGroups["grid"].map((group, idx) => (
+						<button
+							key={`grid-${idx}`}
+							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
+							onClick={() => {
+								setActiveCompany("grid");
 								setActiveImageGroup(idx);
 								setTimeout(() => {
 									imageGalleriaRef.current?.show();
