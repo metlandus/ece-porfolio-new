@@ -24,6 +24,17 @@ const groupDefs = [
 	},
 ];
 
+const videoDefs = [
+	{ key: "medicana", prefix: "medicana", groupCount: 2, groupSize: 4 },
+	{ key: "divan", prefix: "divan", groupCount: 1, groupSize: 3 },
+	{ key: "fairy", prefix: "fairy", groupCount: 1, groupSize: 2 },
+	{ key: "merco", prefix: "merco", groupCount: 1, groupSize: 2 },
+	{ key: "mobile-case", prefix: "mobile-case", groupCount: 1, groupSize: 3 },
+	{ key: "paradontax", prefix: "paradontax", groupCount: 1, groupSize: 2 },
+	{ key: "pegasus", prefix: "pegasus", groupCount: 2, groupSize: 6 },
+	{ key: "penti", prefix: "penti", groupCount: 1, groupSize: 4 },
+];
+
 const miscPhotos = [
 	"Merco",
 	"Paradontax",
@@ -58,15 +69,32 @@ const allImageGroups = Object.fromEntries(
 	groupDefs.map((def) => [def.key, createImageGroups(def)])
 );
 
-// Videos
-const videoGroups = Array.from({ length: 4 }, (_, groupIdx) => {
-	const start = groupIdx * 2 + 1;
-	return Array.from({ length: 2 }, (_, i) => ({
-		videoSrc: `/portfolio/medicana/Medicana-V-${start + i}.mp4`,
-		alt: `Medicana Video ${start + i}`,
-		title: `Medicana Video ${start + i}`,
-	}));
-});
+// Create video groups based on definitions
+const createVideoGroups = ({ prefix, groupCount, groupSize, ext = "mp4" }) => {
+	return Array.from({ length: groupCount }, (_, groupIdx) => {
+		const start = groupIdx * groupSize + 1;
+		return Array.from({ length: groupSize }, (_, i) => ({
+			videoSrc: `/portfolio/videos/${prefix}-V-${start + i}.${ext}`,
+			alt: `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} Video ${
+				start + i
+			}`,
+			title: `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} Video ${
+				start + i
+			}`,
+		}));
+	});
+};
+
+// All video groups
+const allVideoGroups = Object.fromEntries(
+	videoDefs.map((def) => [def.key, createVideoGroups(def)])
+);
+
+// Flatten all video groups into a single array of groups
+const allVideoGroupsFlat = Object.values(allVideoGroups).flat();
+
+// Add singular (misc) videos
+const miscVideos = ["Exathlon", "Case1", "Case2", "Hershey"];
 
 export default function Portfolio() {
 	// Images
@@ -89,7 +117,9 @@ export default function Portfolio() {
 	return (
 		<main className="bg-main-yellow min-h-screen">
 			<section className="container mx-auto py-10">
-				<h1 className="text-4xl mb-8">My Portfolio</h1>
+				<h1 className="text-center text-5xl font-medium mb-18 text-main-text">
+					My Portfolio
+				</h1>
 				{/* Images Grid */}
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
 					{allImageGroups["medicana"].map((group, idx) => (
@@ -270,11 +300,9 @@ export default function Portfolio() {
 								style={{
 									width: "100%",
 									height: "100%",
-								}}
-								imageStyle={{
-									height: "100%",
 									objectFit: "cover",
 								}}
+								imageClassName="w-full h-full object-cover"
 							/>
 						</div>
 					))}
@@ -316,9 +344,9 @@ export default function Portfolio() {
 				/>
 
 				{/* Videos Section */}
-				<h2 className="text-3xl mt-16 mb-8">Videos</h2>
+				<h2 className="text-3xl mt-16 mb-8 text-main-text">Videos</h2>
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-					{videoGroups.map((group, idx) => (
+					{allVideoGroupsFlat.map((group, idx) => (
 						<button
 							key={idx}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
@@ -341,11 +369,73 @@ export default function Portfolio() {
 							/>
 						</button>
 					))}
+					{miscVideos.map((videoName, idx) => (
+						<button
+							key={`misc-${videoName}-${idx}`}
+							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
+							onClick={() => {
+								setActiveVideoGroup(
+									allVideoGroupsFlat.length + idx
+								);
+								setTimeout(() => {
+									videoGalleriaRef.current?.show();
+								}, 0);
+							}}
+						>
+							{videoName === "Hershey" ? (
+								<NextImage
+									src={"/portfolio/videos/Hershey-thumb.png"}
+									alt="Hershey Video Thumbnail"
+									width={1200}
+									height={1200}
+									quality={100}
+									style={{
+										width: "100%",
+										height: "100%",
+										objectFit: "cover",
+										background: "#000",
+									}}
+								/>
+							) : (
+								<video
+									src={`/portfolio/videos/${videoName}-V-1.mp4`}
+									muted
+									style={{
+										width: "100%",
+										height: "100%",
+										objectFit: "cover",
+										background: "#000",
+									}}
+								/>
+							)}
+						</button>
+					))}
 				</div>
 				{/* Videos Galleria */}
 				<Galleria
 					ref={videoGalleriaRef}
-					value={videoGroups[activeVideoGroup]}
+					value={
+						activeVideoGroup < allVideoGroupsFlat.length
+							? allVideoGroupsFlat[activeVideoGroup]
+							: [
+									{
+										videoSrc: `/portfolio/videos/${
+											miscVideos[
+												activeVideoGroup -
+													allVideoGroupsFlat.length
+											]
+										}-V-1.mp4`,
+										alt: miscVideos[
+											activeVideoGroup -
+												allVideoGroupsFlat.length
+										],
+										title: miscVideos[
+											activeVideoGroup -
+												allVideoGroupsFlat.length
+										],
+									},
+							  ]
+					}
 					activeIndex={0}
 					numVisible={4}
 					circular
@@ -359,7 +449,7 @@ export default function Portfolio() {
 							controls
 							style={{
 								width: "100%",
-								maxHeight: "80vh",
+								height: "80vh",
 								background: "#000",
 								objectFit: "contain",
 							}}
@@ -378,7 +468,7 @@ export default function Portfolio() {
 							}}
 						/>
 					)}
-					style={{ maxWidth: 900 }}
+					style={{ width: 700 }}
 					thumbnailsPosition="bottom"
 					showIndicators={false}
 					showIndicatorsOnItem={false}

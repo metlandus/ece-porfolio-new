@@ -5,3 +5,8 @@
 	--color-main-text: #670000;
 	--color-main-yellow: #ffefae;
 }
+
+.p-galleria-thumbnail-prev.p-disabled,
+.p-galleria-thumbnail-next.p-disabled {
+	display: none !important;
+}
