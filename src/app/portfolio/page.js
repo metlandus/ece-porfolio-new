@@ -24,6 +24,16 @@ const groupDefs = [
 	},
 ];
 
+const miscPhotos = [
+	"Merco",
+	"Paradontax",
+	"BookCover",
+	"Infographic",
+	"Pictogram",
+	"Surrealism",
+	"Typographic",
+];
+
 // Create image groups based on definitions
 const createImageGroups = ({ prefix, ext = "png", groupCount, groupSize }) => {
 	return Array.from({ length: groupCount }, (_, groupIdx) => {
@@ -70,20 +80,8 @@ export default function Portfolio() {
 
 	// Helper to get the correct group array
 	const getActiveImageGroup = () => {
-		if (activeCompany === "medicana") {
-			return allImageGroups["medicana"][activeImageGroup];
-		} else if (activeCompany === "jaliri") {
-			return allImageGroups["jaliri"][activeImageGroup];
-		} else if (activeCompany === "koc") {
-			return allImageGroups["koc"][activeImageGroup];
-		} else if (activeCompany === "mastercard") {
-			return allImageGroups["mastercard"][activeImageGroup];
-		} else if (activeCompany === "divan") {
-			return allImageGroups["divan"][activeImageGroup];
-		} else if (activeCompany === "hershey-sub") {
-			return allImageGroups["hershey-sub"][activeImageGroup];
-		} else if (activeCompany === "grid") {
-			return allImageGroups["grid"][activeImageGroup];
+		if (activeCompany !== undefined) {
+			return allImageGroups[activeCompany][activeImageGroup];
 		}
 		return [];
 	};
@@ -132,6 +130,7 @@ export default function Portfolio() {
 							<Image
 								src={group[0].thumbnailImageSrc}
 								alt={group[0].alt}
+								imageClassName="w-full h-full object-cover"
 								style={{
 									width: "100%",
 									height: "100%",
@@ -178,6 +177,7 @@ export default function Portfolio() {
 							<Image
 								src={group[0].thumbnailImageSrc}
 								alt={group[0].alt}
+								imageClassName="w-full h-full object-cover"
 								style={{
 									width: "100%",
 									height: "100%",
@@ -225,6 +225,7 @@ export default function Portfolio() {
 							<Image
 								src={group[0].thumbnailImageSrc}
 								alt={group[0].alt}
+								imageClassName="w-full h-full object-cover"
 								style={{
 									width: "100%",
 									height: "100%",
@@ -248,6 +249,7 @@ export default function Portfolio() {
 							<Image
 								src={group[0].thumbnailImageSrc}
 								alt={group[0].alt}
+								imageClassName="w-full h-full object-cover"
 								style={{
 									width: "100%",
 									height: "100%",
@@ -256,21 +258,26 @@ export default function Portfolio() {
 							/>
 						</button>
 					))}
-					<div className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition">
-						<Image
-							src="/portfolio/misc/Grid-1.jpg"
-							alt="Grid-1"
-							preview
-							style={{
-								height: "100%",
-								width: "100%",
-							}}
-							imageStyle={{
-								height: "100%",
-								objectFit: "cover",
-							}}
-						/>
-					</div>
+					{miscPhotos.map((photo) => (
+						<div
+							key={photo}
+							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
+						>
+							<Image
+								src={`/portfolio/misc/${photo}-1.jpg`}
+								alt={`${photo}-1`}
+								preview
+								style={{
+									width: "100%",
+									height: "100%",
+								}}
+								imageStyle={{
+									height: "100%",
+									objectFit: "cover",
+								}}
+							/>
+						</div>
+					))}
 				</div>
 				{/* Images Galleria */}
 				<Galleria
