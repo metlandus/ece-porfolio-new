@@ -171,7 +171,8 @@ export default function Home() {
 						follow this
 						<Link
 							href="/portfolio"
-							className="pl-1 text-main-text hover:underline"
+							className="pl-1 font-medium text-main-text hover:underline"
+							aria-label="Portfolio Link"
 						>
 							link!
 						</Link>
@@ -180,18 +181,25 @@ export default function Home() {
 			</section>
 			<section id="contactme" className="bg-main-text">
 				<div className="container mx-auto">
-					<h2>Do you want to contact me?</h2>
-					<h3>
-						You can download my CV from{" "}
+					<h2 className="text-white text-3xl py-10 font-medium">
+						Do you want to contact me?
+					</h2>
+					<div className="flex gap-4 items-between items-center">
+						<h3 className="text-main-yellow text-xl">
+							You can download my CV from{" "}
+						</h3>
 						<a
 							href="/ECE_SAYDUT_DESIGNER_CV.pdf"
 							download
 							aria-label="Download my CV"
+							className="bg-main-yellow font-medium py-0.5 px-2 rounded-xl transition-all duration-300 hover:px-4 hover:py-4"
 						>
-							Here
+							<span className="text-main-text text-xl">Here</span>
 						</a>
+					</div>
+					<h3 className="text-white text-xl">
+						And you can reach me out from my socials.
 					</h3>
-					<h3>And you can reach me out from my socials.</h3>
 
 					<div className="flex gap-4 mt-4">
 						<a
