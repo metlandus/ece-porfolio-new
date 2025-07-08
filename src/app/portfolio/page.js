@@ -434,7 +434,7 @@ export default function Portfolio() {
 												allVideoGroupsFlat.length
 										],
 									},
-							  ]
+							]
 					}
 					activeIndex={0}
 					numVisible={4}

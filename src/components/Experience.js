@@ -11,7 +11,7 @@ function Experience({ title, workDate, link, company }) {
 				<a
 					href={link}
 					target="_blank"
-					className="text-main-yellow hover:underline under underline-offset-4 hover:text-main-yellow/80"
+					className="text-main-yellow hover:underline underline-offset-4 hover:font-medium"
 				>
 					{company}
 				</a>

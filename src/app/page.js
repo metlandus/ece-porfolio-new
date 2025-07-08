@@ -1,10 +1,10 @@
 "use client";
-// import Image from "next/image";
+import NextImage from "next/image";
 import { Image } from "primereact/image";
 import Link from "next/link";
 import Typewriter from "@/components/Typewriter";
 import Experience from "@/components/Experience";
-import Error from "next/error";
+import { FaArrowUp } from "react-icons/fa";
 
 export default function Home() {
 	return (
@@ -28,7 +28,7 @@ export default function Home() {
 						<a
 							href="https://www.linkedin.com/company/medicana-health-group/"
 							target="_blank"
-							className="underline hover:text-main-text/80"
+							className="underline hover:font-normal"
 						>
 							Medicana International
 						</a>
@@ -68,7 +68,7 @@ export default function Home() {
 					/>
 				</div>
 			</section>
-			<section id="experience" className="bg-main-text">
+			<section id="experience" className="bg-main-text pt-10">
 				<div className="container mx-auto">
 					<h2 className="text-white text-7xl font-light">
 						Experience
@@ -106,15 +106,17 @@ export default function Home() {
 							company={"Gelişim Reklam, Ist"}
 						/>
 					</div>
-					<h2 className="text-white text-7xl font-light">
-						Education
-					</h2>
-					<Experience
-						title={"Visual Communication Design"}
-						workDate={"Sep 16 - Jun 12 "}
-						link={"https://bau.edu.tr/"}
-						company={"Bahçeşehir University, Ist"}
-					/>
+					<div className="pt-15 py-1">
+						<h2 className="text-white text-7xl font-light">
+							Education
+						</h2>
+						<Experience
+							title={"Visual Communication Design"}
+							workDate={"Sep 16 - Jun 12 "}
+							link={"https://bau.edu.tr/"}
+							company={"Bahçeşehir University, Ist"}
+						/>
+					</div>
 				</div>
 			</section>
 			<section id="selectedportfolios" className="bg-main-yellow">
@@ -171,7 +173,7 @@ export default function Home() {
 						follow this
 						<Link
 							href="/portfolio"
-							className="pl-1 font-medium text-main-text hover:underline"
+							className="p-1 font-medium text-lg rounded-full transition-all hover:p-2 duration-150 text-main-text hover:text-main-yellow hover:bg-main-text"
 							aria-label="Portfolio Link"
 						>
 							link!
@@ -195,15 +197,17 @@ export default function Home() {
 								aria-label="Download my CV"
 								className="bg-main-yellow text-main-text font-semibold py-2 px-5 rounded-full shadow-md hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-main-yellow/40 text-xl group inline-flex items-center"
 							>
-								<span className="block">Here</span>
-								<span className="w-0 overflow-hidden group-hover:w-6 transition-all duration-300 flex items-center">
+								<span className="block group-hover:py-2.5 transition-all duration-300">
+									Here
+								</span>
+								<span className="w-0 overflow-hidden group-hover:w-7 transition-all duration-300 flex items-center">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
 										viewBox="0 0 24 24"
-										strokeWidth={2}
+										strokeWidth={3}
 										stroke="currentColor"
-										className="w-5 h-5 ml-1"
+										className="w-6 h-6 ml-1"
 									>
 										<path
 											strokeLinecap="round"
@@ -342,12 +346,12 @@ export default function Home() {
 										);
 									}}
 								>
-									<img
+									<NextImage
 										width="36"
 										height="36"
 										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAIF0lEQVR4nOVbB28cRRTen7SBJCBI6IJQRBG9CSHRexFFAkRooiMEhBLExU4cJ05zGnGK0xPS4+CYFKc7xell93rxQ9/evbu3s+W61748aSTf7s7s7Dfz2jfPmh4y6HJuWtATCLppQU8g6KYFPYGGBuCKSQY9Pj9CX26I0ZSeBK3qS9GBCxm6GB+gRJpsEk4OUN+lDHWdSlP73iR9tylOTy6I0JVNwwyAu2eF6ftNcVrdlyIzMUDVCoBZcjBFby+P0ujmIQrA6GaDPlkXo+7TyrLWWM7FBmhiV4JuajWHBgCjmw36cUuczkarX+lyJJIcoD+6EnTNFDM4AN5bGaX+cKbijzhhZmhbv33HbDuZtq6XM8YrS6ODC8CNrSZ1HkqVNMFYyn1nzN6btHbP710J23X8xnUYwXKkbXd2vLoD8Oi8CJ2KFN/uUAkYwlC3/QMhf+5I5MdzA4Dv/fWvs+9RI2PZATfpOZOmm6eZ9QPgzc6o54qypDNETd0JunaKSffMCjtc3cL9SduYfgCgLTpg3wkY7+G5YZrUnbDepcpxM0P3zg7XHoDXO6OUKqKahy5m6IkFkXyfVUdSjtUDMOUAgOfRTwpiCd6NiBtUOR0ZsFxxzQB4riPiWElV1vSlbB/30NwwqXvl1WVOY1UMAAv8ZVHH+x6Zl/3AMS2mFW+oAuN8y3SzegDGtYWtqM1PYNAQ8cl+SxUjueF4dtUqAQBt0wn7CnQcKKgSIkU3o4mYpBTDqHndGNlkFA1sZu1J0gilHwyRqp/PdkSqAuD5xRHbcxhfrjDm0N6bdPUOFQPwy7Z40W2vrjwarL+U3WfTni8vFQC0vefsqOI98j7moqoD9u7LReIEze3ibW0mRX0s/uFLToPmNdGvN8ZrAsC3JQALm4C5qcHSVc1lArBwv3cgAm+ADM/LZqhbFYFTLQBA/J9R1uT2GU5rD0+kqqDfuJp64c6ZYceLpMAHew2GhEgNbf22XzkAoCFVloL3uT3XvDPhyCivn2qWBkBLjzMCkxGe19ZHQ9oq5aet8ZoC8PNWuxrA27g9hzmqCZrX2Jr8gewKaDWiABB4Nl8A3lnhDDoaSd5aHvUHoEOJvRtNFh9MeQMwsskgowYU1lAWUHSjFDXQ/IzO5dC0oCcwrABYd7Tg5pDx4Ro4QZb1xwo6diFHXMCrIFWG4Mp1LVk3ijidZeaeZN59cQyCiI49ElSTcw6E4KqbvX9O2HUONQfg1+2Fj/1oTcyRqcXTZIWd49rM/DXcl4nKM4uyUaTM80Fk4NrTfxeSHvSRY98xI2zpLwhRli392UDrg9WFAAxzrBsALywuuEkETFdPNh1cAZ4BgSIpMBkhIqZHtKkKSIyvNhQA/mx9jCbuKARKYKTATUhJZsjaNZNF5Pfikmj9ABjTUtiiQB+ZFgsDgclMEJkkCI0H2gsfPH9fkr74JwsIxuK4HR8/R+T1D7aHLRJFRnLMMUrQMf7G4+n8eGNzKlYXAPSQQfvOZ/J62fpfIh9lcQzRez5DnYcLeookBvrLLnbPuQytzNFl4Bs4vkcqu+ts9m/oPtJbxO+84dEHfdmf94ezd6btSuTtDY7d6moE9ZBhWyV+MVb1wzXZVcUVZpGg59wPrBBvWzZuONyYkLMr0G1eWeg+9+P0FmMyGOPXxvJ2hecAmdubrD8A49faMz7I+6tiFhOkhlGSBcbHqvLUwoiVvvpR5wv2OaNTGNl3VzrD9k89ssOaAnCfcDmsd3xWp5Ih0Gvu99IS+4ShEuDzsNXPK1w/9Jr7fZ6zFyxQQVyHO1XTdtiNugMwImTQJREyQ2/5HrgCKaCu+d5YZcI4XeJ70Gkp8oAD5wBSJvcUdofkLNlu1B0APWRYRg4goP0m/C58PF93Sz9xesP3P15b2K7w43wdhk72wUfhNIrvgyDlewiE+DqfFwwKAHoDNS3oCQTdNP4D27XYIUgjpMOqWmryxzyXw4VGEhy2+qrAay7ncI0kyCd8ARjVZHdxlx0pqocMmpqL74cDLY73eSVtKi0u3bUvALdOd6a4UlAA4TXB8crByPaADkZkesxBEhMxRQHQQwbNEGyNKkhfZSGEbJII4Wf9StrKAQDRoRr64ihOfQ7FlepzSLiKukHd9iFh33KYIz6Ho5yysnxTo8NRVI5KkSG4DLfVqpFjRgWHo3rIsLEzbgJ+0C32VieqhraVAtCrAIv3yPuYi+QsIVhCJGF+aqV53cCAm5XKDFVQmaGC4FYgASqrGgAkFQfB+DJhQoIGTkIVEDZ+H68XC4VBRErCoVQQVG8gCY5KAAD95hXQIKUGEaLKjlNVlsjowqj4FUswFQ3X41ckJXP8cgB4QxCsEIyLFJl1Xt32zDKXWjOolfIQylGLlcnB+AAs7sO8X7VlcjBiUlB+h3vwRGoJHQSp810za1gmp+caGOBiR+fQTRAW2A2gudV4Qo3F/QAY4UKUYDyUyMHPuxVxAJByagT1ctNh0NulFDOD4vphs3upLEpgSwFAZZf4A1X6jGXn6TqXyuq5dkOr6Shh9RKvWKLdp1gaPtvNqPkJqPFBKZbWRcPpD3PzFZfLn3SWy5dTgg/7UO5JUM0A0HP/MIGACfW5g01s4PQJR3PVzF+v5b/MgNjc2p92uL9aypnIgBXXe1V8BQaALhpcEOJ/nAQVK7IuRXB+AJsDlVOrO4YkALpoICAemx+xDjeQRiNCBJePlZTH3BC4WByDwQ6gBhkVpuhbCdc/ZADQh0HTgp5A0E0LegJBNy3oCQTd/gehhsVhASrZhgAAAABJRU5ErkJggg=="
 										alt="domain"
-										className="rounded-md"
+										className="rounded-md cursor-pointer"
 									/>
 								</button>
 							</div>
@@ -355,6 +359,14 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
+			<button
+				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+				className="cursor-pointer w-12 h-12 rounded-full fixed right-5 bottom-5"
+			>
+				<div className="rounded-full bg-main-yellow w-12 h-12 hover:shadow-[0px_0px_15px_6px_rgba(103,0,0,1)] transition-all duration-150 flex justify-center items-center">
+					<FaArrowUp size={24} />
+				</div>
+			</button>
 		</main>
 	);
 }

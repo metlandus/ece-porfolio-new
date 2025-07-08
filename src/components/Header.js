@@ -10,36 +10,38 @@ export default function Header() {
 			<nav className="flex gap-6">
 				<Link
 					href="/"
-					className={`text-main-text py-3 px-1 hover:text-main-yellow focus:border-b-2 focus:border-main-text`}
+					className={`text-main-text py-3 px-1 hover:font-semibold hover:text-lg transition-all duration-150 focus:border-b-2 focus:border-main-text`}
 				>
 					Home
 				</Link>
 				<Link
 					href="/#aboutme"
-					className="text-main-text py-3 px-1 hover:text-main-yellow focus:border-b-2 focus:border-main-text"
+					className="text-main-text py-3 px-1 hover:font-semibold hover:text-lg transition-all duration-150 focus:border-b-2 focus:border-main-text"
 				>
 					About
 				</Link>
 				<Link
 					href="/#experience"
-					className="text-main-text py-3 px-1 hover:text-blue-500 focus:border-b-2 focus:border-main-text"
+					className="text-main-text py-3 px-1 hover:font-semibold hover:text-lg transition-all duration-150 focus:border-b-2 focus:border-main-text"
 				>
 					Experience
 				</Link>
 				<Link
 					href="/portfolio"
-					className={`text-main-text py-3 px-1 hover:text-blue-500 focus:border-b-2 focus:border-main-text `}
+					className={`text-main-text py-3 px-1 hover:font-semibold hover:text-lg transition-all duration-150 focus:border-b-2 focus:border-main-text `}
 				>
 					Portfolio
 				</Link>
-				<Link
-					href="/#contactme"
-					className="text-main-text py-3 px-1 hover:text-blue-500 focus:border-b-2 focus:border-main-text"
-				>
-					Contact
-				</Link>
 			</nav>
-			<button>Let&apos;s Talk</button>
+			<Link
+				href="/#contactme"
+				className="relative py-3 px-6 rounded-full font-semibold hover:shadow-lg transition-all duration-300 overflow-hidden group"
+			>
+				<span className="absolute inset-0 bg-main-yellow animate-pulse group-hover:animate-none group-hover:bg-main-yellow transition-colors duration-250"></span>
+				<span className="relative z-10 text-main-text">
+					Let&apos;s Talk
+				</span>
+			</Link>
 		</header>
 	);
 }

@@ -23,7 +23,14 @@ export default function RootLayout({ children }) {
 						<Header />
 					</section>
 					{children}
-					<footer>METETEETETARŞAWERJLAKŞ</footer>
+					<footer className="bg-main-yellow w-full text-main-text">
+						<div className="container mx-auto flex justify-end">
+							Made with ♡ by
+							<a href="#" className="pl-1">
+								BurgerDev
+							</a>
+						</div>
+					</footer>
 				</body>
 			</PrimeReactProvider>
 		</html>
