@@ -35,7 +35,7 @@ export default function Header() {
 			</nav>
 			<button
 				onClick={() =>
-					window.scrollTo({ top: 5000, behavior: "smooth" })
+					window.scrollTo({ top: 3600, behavior: "smooth" })
 				}
 				className="relative py-3 px-6 rounded-full font-semibold hover:shadow-lg transition-all duration-300 overflow-hidden group"
 			>
