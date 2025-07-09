@@ -45,6 +45,27 @@ const miscPhotos = [
 	"Typographic",
 ];
 
+const gifData = [
+	{
+		itemImageSrc: "/portfolio/gifs/Nike-Gif-1.gif",
+		thumbnailImageSrc: "/portfolio/gifs/Nike-Gif-1.gif",
+		alt: "GIF 1",
+		title: "GIF 1",
+	},
+	{
+		itemImageSrc: "/portfolio/gifs/Nike-Gif-2.gif",
+		thumbnailImageSrc: "/portfolio/gifs/Nike-Gif-2.gif",
+		alt: "GIF 2",
+		title: "GIF 2",
+	},
+	{
+		itemImageSrc: "/portfolio/gifs/Nike-Gif-3.gif",
+		thumbnailImageSrc: "/portfolio/gifs/Nike-Gif-3.gif",
+		alt: "GIF 3",
+		title: "GIF 3",
+	},
+];
+
 // Create image groups based on definitions
 const createImageGroups = ({ prefix, ext = "png", groupCount, groupSize }) => {
 	return Array.from({ length: groupCount }, (_, groupIdx) => {
@@ -105,6 +126,9 @@ export default function Portfolio() {
 	// Videos
 	const videoGalleriaRef = useRef(null);
 	const [activeVideoGroup, setActiveVideoGroup] = useState(0);
+
+	// GIFs
+	const gifGalleriaRef = useRef(null);
 
 	// Helper to get the correct group array
 	const getActiveImageGroup = () => {
@@ -288,6 +312,27 @@ export default function Portfolio() {
 							/>
 						</button>
 					))}
+					<button
+						className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
+						onClick={() => {
+							setTimeout(() => {
+								gifGalleriaRef.current?.show();
+							}, 0);
+						}}
+					>
+						<NextImage
+							src={gifData[0].thumbnailImageSrc}
+							alt="GIFs Gallery"
+							width={100}
+							height={100}
+							style={{
+								backgroundColor: "#000",
+								width: "100%",
+								height: "100%",
+								objectFit: "cover",
+							}}
+						/>
+					</button>
 					{miscPhotos.map((photo) => (
 						<div
 							key={photo}
@@ -335,6 +380,51 @@ export default function Portfolio() {
 							height={100}
 							quality={100}
 							className="w-[90px] aspect-square object-cover rounded-lg"
+						/>
+					)}
+					style={{ maxWidth: 900 }}
+					thumbnailsPosition="bottom"
+					showIndicators={false}
+					showIndicatorsOnItem={false}
+				/>
+
+				{/* GIFs Galleria */}
+				<Galleria
+					ref={gifGalleriaRef}
+					value={gifData}
+					activeIndex={0}
+					numVisible={3}
+					circular
+					fullScreen
+					showThumbnails
+					showItemNavigators
+					showItemNavigatorsOnHover
+					item={(item) => (
+						<NextImage
+							src={item.itemImageSrc}
+							alt={item.alt}
+							width={100}
+							height={100}
+							style={{
+								width: "100%",
+								height: "80vh",
+								objectFit: "contain",
+								background: "#000",
+							}}
+						/>
+					)}
+					thumbnail={(item) => (
+						<NextImage
+							src={item.thumbnailImageSrc}
+							alt={item.alt}
+							width={100}
+							height={100}
+							style={{
+								width: "90px",
+								aspectRatio: "1/1",
+								objectFit: "cover",
+								borderRadius: "0.5rem",
+							}}
 						/>
 					)}
 					style={{ maxWidth: 900 }}
@@ -434,7 +524,7 @@ export default function Portfolio() {
 												allVideoGroupsFlat.length
 										],
 									},
-							]
+							  ]
 					}
 					activeIndex={0}
 					numVisible={4}
