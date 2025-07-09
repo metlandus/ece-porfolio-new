@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import { Poppins } from "next/font/google";
 import { PrimeReactProvider } from "primereact/api";
+import Footer from "@/components/Footer";
 
 export const metadata = {
 	title: "Ece Saydut",
@@ -23,14 +24,7 @@ export default function RootLayout({ children }) {
 						<Header />
 					</section>
 					{children}
-					<footer className="bg-main-yellow w-full text-main-text">
-						<div className="container mx-auto flex justify-end">
-							Made with ♡ by
-							<a href="#" className="pl-1">
-								BurgerDev
-							</a>
-						</div>
-					</footer>
+					<Footer />
 				</body>
 			</PrimeReactProvider>
 		</html>
