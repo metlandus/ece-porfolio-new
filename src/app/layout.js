@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { Poppins } from "next/font/google";
 import { PrimeReactProvider } from "primereact/api";
 import Footer from "@/components/Footer";
+import ContactMe from "@/components/ContactMe";
 
 export const metadata = {
 	title: "Ece Saydut",
@@ -23,7 +24,8 @@ export default function RootLayout({ children }) {
 					<section>
 						<Header />
 					</section>
-					{children}
+                    {children}
+                    <ContactMe/>
 					<Footer />
 				</body>
 			</PrimeReactProvider>

@@ -33,15 +33,18 @@ export default function Header() {
 					Portfolio
 				</Link>
 			</nav>
-			<Link
-				href="/#contactme"
+			<button
+				onClick={() =>
+					window.scrollTo({ top: 5000, behavior: "smooth" })
+				}
 				className="relative py-3 px-6 rounded-full font-semibold hover:shadow-lg transition-all duration-300 overflow-hidden group"
 			>
+				{" "}
 				<span className="absolute inset-0 bg-main-yellow animate-pulse group-hover:animate-none group-hover:bg-main-yellow transition-colors duration-250"></span>
 				<span className="relative z-10 text-main-text">
 					Let&apos;s Talk
 				</span>
-			</Link>
+			</button>
 		</header>
 	);
 }
