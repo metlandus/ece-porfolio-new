@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"next": "15.3.3",
+		"next": "^15.5.9",
 		"next-gallery": "^2.1.1",
 		"primereact": "^10.9.6",
 		"react": "^19.0.0",

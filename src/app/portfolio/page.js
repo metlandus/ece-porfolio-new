@@ -9,15 +9,46 @@ import NextImage from "next/image";
 
 // Group definitions
 const groupDefs = [
-	{ key: "medicana", prefix: "medicana", groupCount: 5, groupSize: 6 },
-	{ key: "jaliri", prefix: "jaliri", groupCount: 1, groupSize: 2 },
-	{ key: "koc", prefix: "koc", groupCount: 1, groupSize: 4 },
-	{ key: "mastercard", prefix: "mastercard", groupCount: 1, groupSize: 2 },
-	{ key: "divan", prefix: "divan", groupCount: 1, groupSize: 3 },
-	{ key: "grid", prefix: "grid", groupCount: 1, groupSize: 2 },
+	{
+		key: "medicana",
+		folder: "medicana",
+		prefix: "Medicana",
+		groupCount: 5,
+		groupSize: 6,
+	},
+	{
+		key: "jaliri",
+		folder: "jaliri",
+		prefix: "Jaliri",
+		groupCount: 1,
+		groupSize: 2,
+	},
+	{ key: "koc", folder: "koc", prefix: "Koc", groupCount: 1, groupSize: 4 },
+	{
+		key: "mastercard",
+		folder: "mastercard",
+		prefix: "MasterCard",
+		groupCount: 1,
+		groupSize: 2,
+	},
+	{
+		key: "divan",
+		folder: "divan",
+		prefix: "Divan",
+		groupCount: 1,
+		groupSize: 3,
+	},
+	{
+		key: "grid",
+		folder: "grid",
+		prefix: "Grid",
+		groupCount: 1,
+		groupSize: 2,
+	},
 	{
 		key: "hershey-sub",
-		prefix: "hershey-sub",
+		folder: "hershey-sub",
+		prefix: "Hershey-Sub",
 		ext: "jpg",
 		groupCount: 1,
 		groupSize: 6,
@@ -25,14 +56,14 @@ const groupDefs = [
 ];
 
 const videoDefs = [
-	{ key: "medicana", prefix: "medicana", groupCount: 2, groupSize: 4 },
-	{ key: "divan", prefix: "divan", groupCount: 1, groupSize: 3 },
-	{ key: "fairy", prefix: "fairy", groupCount: 1, groupSize: 2 },
-	{ key: "merco", prefix: "merco", groupCount: 1, groupSize: 2 },
-	{ key: "mobile-case", prefix: "mobile-case", groupCount: 1, groupSize: 3 },
-	{ key: "paradontax", prefix: "paradontax", groupCount: 1, groupSize: 2 },
-	{ key: "pegasus", prefix: "pegasus", groupCount: 2, groupSize: 6 },
-	{ key: "penti", prefix: "penti", groupCount: 1, groupSize: 4 },
+	{ key: "medicana", prefix: "Medicana", groupCount: 2, groupSize: 4 },
+	{ key: "divan", prefix: "Divan", groupCount: 1, groupSize: 3 },
+	{ key: "fairy", prefix: "Fairy", groupCount: 1, groupSize: 2 },
+	{ key: "merco", prefix: "Merco", groupCount: 1, groupSize: 2 },
+	{ key: "mobile-case", prefix: "Mobile-Case", groupCount: 1, groupSize: 3 },
+	{ key: "paradontax", prefix: "Paradontax", groupCount: 1, groupSize: 2 },
+	{ key: "pegasus", prefix: "Pegasus", groupCount: 2, groupSize: 6 },
+	{ key: "penti", prefix: "Penti", groupCount: 1, groupSize: 4 },
 ];
 
 const miscPhotos = [
@@ -67,27 +98,30 @@ const gifData = [
 ];
 
 // Create image groups based on definitions
-const createImageGroups = ({ prefix, ext = "png", groupCount, groupSize }) => {
+
+const createImageGroups = ({
+	prefix,
+	folder,
+	ext = "png",
+	groupCount,
+	groupSize,
+}) => {
 	return Array.from({ length: groupCount }, (_, groupIdx) => {
 		const start = groupIdx * groupSize + 1;
 		return Array.from({ length: groupSize }, (_, i) => ({
-			itemImageSrc: `/portfolio/${prefix}/${prefix}-${start + i}.${ext}`,
-			thumbnailImageSrc: `/portfolio/${prefix}/${prefix}-${
+			itemImageSrc: `/portfolio/${folder ?? prefix}/${prefix}-${start + i}.${ext}`,
+			thumbnailImageSrc: `/portfolio/${folder ?? prefix}/${prefix}-${
 				start + i
 			}.${ext}`,
-			alt: `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} ${
-				start + i
-			}`,
-			title: `${prefix.charAt(0).toUpperCase() + prefix.slice(1)} ${
-				start + i
-			}`,
+			alt: `${prefix} ${start + i}`,
+			title: `${prefix} ${start + i}`,
 		}));
 	});
 };
 
 // All image groups
 const allImageGroups = Object.fromEntries(
-	groupDefs.map((def) => [def.key, createImageGroups(def)])
+	groupDefs.map((def) => [def.key, createImageGroups(def)]),
 );
 
 // Create video groups based on definitions
@@ -108,7 +142,7 @@ const createVideoGroups = ({ prefix, groupCount, groupSize, ext = "mp4" }) => {
 
 // All video groups
 const allVideoGroups = Object.fromEntries(
-	videoDefs.map((def) => [def.key, createVideoGroups(def)])
+	videoDefs.map((def) => [def.key, createVideoGroups(def)]),
 );
 
 // Flatten all video groups into a single array of groups
@@ -465,7 +499,7 @@ export default function Portfolio() {
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
 							onClick={() => {
 								setActiveVideoGroup(
-									allVideoGroupsFlat.length + idx
+									allVideoGroupsFlat.length + idx,
 								);
 								setTimeout(() => {
 									videoGalleriaRef.current?.show();
@@ -524,7 +558,7 @@ export default function Portfolio() {
 												allVideoGroupsFlat.length
 										],
 									},
-							  ]
+								]
 					}
 					activeIndex={0}
 					numVisible={4}
