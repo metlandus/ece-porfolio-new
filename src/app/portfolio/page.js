@@ -148,7 +148,7 @@ export default function Portfolio() {
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
 					{allImageGroups["medicana"].map((group, idx) => (
 						<button
-							key={`medicana-${idx}`}
+							key={`Medicana-${idx}`}
 							className="relative w-full aspect-square overflow-hidden rounded-lg shadow-lg hover:scale-105 transition"
 							onClick={() => {
 								setActiveCompany("medicana");
